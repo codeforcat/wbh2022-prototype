@@ -8,10 +8,10 @@ const OBNIZ_ID = '6119-5084'
 const TOIO_SERVICE_UUID = '10b20100-5b3b-4571-9508-cf3efcd7bbae'
 const MOTOR_CHARACTERISTIC_UUID = '10b20102-5b3b-4571-9508-cf3efcd7bbae'
 const SOUND_CHARACTERISTIC_UUID = '10B20104-5B3B-4571-9508-CF3EFCD7BBAE'
-const motorBuf1 = new Uint8Array([0x02, 0x01, 0x01, 0x32, 0x02, 0x02, 0x32, 0x78])
-const soundBuf1 = new Uint8Array([0x02, 0x04, 0xFF])
-const motorBuf2 = new Uint8Array([0x02, 0x01, 0x01, 0x32, 0x02, 0x02, 0x32, 0x78])
-const soundBuf2 = new Uint8Array([0x02, 0x06, 0xFF])
+const motorBufGains = new Uint8Array([0x02, 0x01, 0x01, 0x16, 0x02, 0x02, 0x16, 0x96])
+const soundBufGains = new Uint8Array([0x02, 0x04, 0xFF])
+const motorBufPains = new Uint8Array([0x02, 0x01, 0x01, 0x64, 0x02, 0x02, 0x14, 0x0A])
+const soundBufPains = new Uint8Array([0x02, 0x06, 0xFF])
 
 
 function connect() {
@@ -54,38 +54,42 @@ function connect() {
 
     await obniz.ble.scan.startWait(target)
 
-    $('#move-toio1').click(async function() {
-      console.log('move toio pattern1')
-      $('#status').text('move toio pattern1')
+    $('#Gains').click(async function() {
+      console.log('I feel Gain!')
+      $('#status').text('I feel Gain!')
       const peripheralList = obniz.ble.getConnectedPeripherals()
       if (peripheralList.length > 0) {
         for (const peripheral of peripheralList) {
           await peripheral
             .getService(TOIO_SERVICE_UUID)
             .getCharacteristic(SOUND_CHARACTERISTIC_UUID)
-            .writeWait(soundBuf1)
+            .writeWait(soundBufGains)
           await peripheral
             .getService(TOIO_SERVICE_UUID)
             .getCharacteristic(MOTOR_CHARACTERISTIC_UUID)
-            .writeWait(motorBuf1)
+            .writeWait(motorBufGains)
         }
       }
     })
 
-    $('#move-toio2').click(async function() {
-      console.log('move toio pattern2')
-      $('#status').text('move toio pattern2')
+    $('#Pains').click(async function() {
+      console.log('I feel Pain!')
+      $('#status').text('I feel Pain!')
       const peripheralList = obniz.ble.getConnectedPeripherals()
       if (peripheralList.length > 0) {
         for (const peripheral of peripheralList) {
           await peripheral
               .getService(TOIO_SERVICE_UUID)
               .getCharacteristic(SOUND_CHARACTERISTIC_UUID)
-              .writeWait(soundBuf2)
+              .writeWait(soundBufPains)
           await peripheral
               .getService(TOIO_SERVICE_UUID)
               .getCharacteristic(MOTOR_CHARACTERISTIC_UUID)
-              .writeWait(motorBuf2)
+              .writeWait(motorBufPains)
+          await peripheral
+              .getService(TOIO_SERVICE_UUID)
+              .getCharacteristic(MOTOR_CHARACTERISTIC_UUID)
+              .writeWait(motorBufPains)
         }
       }
     })
