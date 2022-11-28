@@ -7,9 +7,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.css" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/obniz/obniz.js"></script>
+    <style>
+        .btn{
+        position: relative;
+        height: 300px;
+        width: 300px;
+        outline: none;
+        cursor: pointer;
+        background-color: white;
+        border: 0px;
+        }
+    </style>
 </head>
 <body>
-<div id="obniz-debug"></div>
 
 <div class="buttons" style="margin-top: 1.0rem">
     <button class="button is-success is-light" type="button" onclick="connect()">
@@ -26,6 +36,19 @@
     </button>
 </div>
 
+<div style="text-align: center;">
+    <div class="buttons" style="margin-top: 1.0rem">
+        <button type="button" class="btn">
+        <img src="img/gains.png">
+        </button>
+        <button type="button" class="btn">
+            <img src="img/pains.png">
+        </button>
+    </div>
+</div>
+
+
+<div id="obniz-debug"></div>
 <div id="status"></div>
 
 <script src="./index.js"></script>
