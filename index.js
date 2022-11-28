@@ -89,15 +89,5 @@ function connect() {
         }
       }
     })
-
-    // joystick
-    // Javascript Example
-    var joystick = obniz.wired("JoyStick", { gnd: 0, y: 3, x: 2, vcc: 1, sw: 5 });
-    joystick.onchangex = function (val) {
-      console.log("x: " + parseInt(1024 * val));
-    };
-
-    joystick.onchangey = function (val) { console.log("y: " + parseInt(1024 * val)); };
-
   }
 }
