@@ -55,8 +55,8 @@ function connect() {
     await obniz.ble.scan.startWait(target)
 
     $('#Gains').click(async function() {
-      console.log('I feel Gain!')
-      $('#status').text('I feel Gain!')
+      console.log('I feel Gains!')
+      $('#status').text('I feel Gains!')
       const peripheralList = obniz.ble.getConnectedPeripherals()
       if (peripheralList.length > 0) {
         for (const peripheral of peripheralList) {
@@ -73,8 +73,8 @@ function connect() {
     })
 
     $('#Pains').click(async function() {
-      console.log('I feel Pain!')
-      $('#status').text('I feel Pain!')
+      console.log('I feel Pains!')
+      $('#status').text('I feel Pains!')
       const peripheralList = obniz.ble.getConnectedPeripherals()
       if (peripheralList.length > 0) {
         for (const peripheral of peripheralList) {
