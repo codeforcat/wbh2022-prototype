@@ -47,6 +47,16 @@ function connect() {
       }
     }
 
+    // メッセージ機能でJoyStickから送られてくる
+    obniz.onmessage = function (message, from) {
+      if (message === "pains") {
+        console.log("painsメッセージが来たよ")
+      }
+      if (message === "gains") {
+        console.log("gainsメッセージが来たよ")
+      }
+    };
+
     obniz.ble.scan.onfinish = async function (peripherals, error) {
       console.log('scan finished!')
       $('#status').text('scan finished!')
