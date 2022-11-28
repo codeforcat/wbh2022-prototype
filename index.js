@@ -51,9 +51,11 @@ function connect() {
     obniz.onmessage = function (message, from) {
       if (message === "pains") {
         console.log("painsメッセージが来たよ")
+        pains();
       }
       if (message === "gains") {
         console.log("gainsメッセージが来たよ")
+        gains();
       }
     };
 
@@ -64,7 +66,9 @@ function connect() {
 
     await obniz.ble.scan.startWait(target)
 
-    $('#Gains').click(async function() {
+    $('#Gains').click(gains)
+
+    async function gains() {
       console.log('I feel Gains!')
       $('#status').text('I feel Gains!')
       const peripheralList = obniz.ble.getConnectedPeripherals()
@@ -80,9 +84,9 @@ function connect() {
             .writeWait(motorBufGains)
         }
       }
-    })
-
-    $('#Pains').click(async function() {
+    }
+    $('#Pains').click(pains)
+    async function pains() {
       console.log('I feel Pains!')
       $('#status').text('I feel Pains!')
       const peripheralList = obniz.ble.getConnectedPeripherals()
@@ -102,6 +106,6 @@ function connect() {
               .writeWait(motorBufPains)
         }
       }
-    })
+    }
   }
 }
