@@ -12,14 +12,14 @@ const motorBuf = new Uint8Array([0x02, 0x01, 0x01, 0x32, 0x02, 0x02, 0x32, 0x78]
 function connect() {
   const obniz = new Obniz(OBNIZ_ID)
   obniz.resetOnDisconnect(false)
-  obniz.onconnect = async function() {
+  obniz.onconnect = async function () {
     let addressList = []
     const target = {
       localNamePrefix: 'toio',
     }
     await obniz.ble.initWait()
     const Toio_CoreCube = Obniz.getPartsClass('toio_CoreCube')
-    obniz.ble.scan.onfind = async function(peripheral) {
+    obniz.ble.scan.onfind = async function (peripheral) {
       if (Toio_CoreCube.isDevice(peripheral)) {
         addressList.push(peripheral.address)
         if (addressList.length === 2) {
@@ -42,14 +42,14 @@ function connect() {
       }
     }
 
-    obniz.ble.scan.onfinish = async function(peripherals, error) {
+    obniz.ble.scan.onfinish = async function (peripherals, error) {
       console.log('scan finished!')
       $('#status').text('scan finished!')
     }
 
     await obniz.ble.scan.startWait(target)
 
-    $('#move-toio').click(async function() {
+    $('#move-toio').click(async function () {
       console.log('move toio')
       $('#status').text('move toio')
       const peripheralList = obniz.ble.getConnectedPeripherals()
@@ -62,5 +62,15 @@ function connect() {
         }
       }
     })
+
+    // joystick
+    // Javascript Example
+    var joystick = obniz.wired("JoyStick", { gnd: 0, y: 3, x: 2, vcc: 1, sw: 5 });
+    joystick.onchangex = function (val) {
+      console.log("x: " + parseInt(1024 * val));
+    };
+
+    joystick.onchangey = function (val) { console.log("y: " + parseInt(1024 * val)); };
+
   }
 }
