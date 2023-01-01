@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,39 +9,46 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/obniz/obniz.js"></script>
     <style>
-        .btn{
-        position: relative;
-        height: 100px;
-        width: 100px;
-        outline: none;
-        cursor: pointer;
-        background-color: white;
-        border: 0px;
+        .btn {
+            position: relative;
+            height: 300px;
+            width: 300px;
+            outline: none;
+            cursor: pointer;
+            background-color: white;
+            border: 0px;
         }
     </style>
 </head>
+
 <body>
-    <h1>JoyStick</h1>
-<div class="buttons" style="margin-top: 1.0rem">
-    <button class="button is-success is-light" type="button" onclick="connect()">
-        接続
-    </button>
-</div>
-<div style="text-align: center;">
-    <div class="buttons" style="margin-top: 1.0rem">
-        <button type="button" class="btn">
-        <img src="img/gains.png">
-        </button>
-        <button type="button" class="btn">
-            <img src="img/pains.png">
-        </button>
+    <div class="columns">
+        <div class="column control">
+            <input class="input" type="text" id="obnizId" placeholder="obnizのID" />
+        </div>
+        <div class="column buttons" style="margin-top: 1.0rem">
+            <button class="button is-success is-light" type="button" onclick="connect()">
+                接続
+            </button>
+        </div>
     </div>
-</div>
+
+    <div style="text-align: center;">
+        <div class="buttons" style="margin-top: 1.0rem">
+            <button id="Gains" type="button" class="btn">
+                <img src="img/gains.png">
+            </button>
+            <button id="Pains" type="button" class="btn">
+                <img src="img/pains.png">
+            </button>
+        </div>
+    </div>
 
 
-<div id="obniz-debug"></div>
-<div id="status"></div>
+    <div id="obniz-debug"></div>
+    <div id="status"></div>
 
-<script src="./joystick.js"></script>
+    <script src="./joystick.js"></script>
 </body>
+
 </html>

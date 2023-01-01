@@ -4,7 +4,6 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const OBNIZ_ID = '6119-5084'
 const TOIO_SERVICE_UUID = '10b20100-5b3b-4571-9508-cf3efcd7bbae'
 const MOTOR_CHARACTERISTIC_UUID = '10b20102-5b3b-4571-9508-cf3efcd7bbae'
 const SOUND_CHARACTERISTIC_UUID = '10B20104-5B3B-4571-9508-CF3EFCD7BBAE'
@@ -15,6 +14,8 @@ const soundBufPains = new Uint8Array([0x02, 0x06, 0xFF])
 
 
 function connect() {
+  // obnizIdはテキストフィールドから取得
+  const OBNIZ_ID = document.getElementById("obnizId").value;
   const obniz = new Obniz(OBNIZ_ID)
   obniz.resetOnDisconnect(false)
   obniz.onconnect = async function () {
@@ -93,17 +94,17 @@ function connect() {
       if (peripheralList.length > 0) {
         for (const peripheral of peripheralList) {
           await peripheral
-              .getService(TOIO_SERVICE_UUID)
-              .getCharacteristic(SOUND_CHARACTERISTIC_UUID)
-              .writeWait(soundBufPains)
+            .getService(TOIO_SERVICE_UUID)
+            .getCharacteristic(SOUND_CHARACTERISTIC_UUID)
+            .writeWait(soundBufPains)
           await peripheral
-              .getService(TOIO_SERVICE_UUID)
-              .getCharacteristic(MOTOR_CHARACTERISTIC_UUID)
-              .writeWait(motorBufPains)
+            .getService(TOIO_SERVICE_UUID)
+            .getCharacteristic(MOTOR_CHARACTERISTIC_UUID)
+            .writeWait(motorBufPains)
           await peripheral
-              .getService(TOIO_SERVICE_UUID)
-              .getCharacteristic(MOTOR_CHARACTERISTIC_UUID)
-              .writeWait(motorBufPains)
+            .getService(TOIO_SERVICE_UUID)
+            .getCharacteristic(MOTOR_CHARACTERISTIC_UUID)
+            .writeWait(motorBufPains)
         }
       }
     }

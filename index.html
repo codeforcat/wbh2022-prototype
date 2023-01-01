@@ -20,12 +20,16 @@
     </style>
 </head>
 <body>
-
-<div class="buttons" style="margin-top: 1.0rem">
-    <button class="button is-success is-light" type="button" onclick="connect()">
-        接続
-    </button>
-</div>
+    <div class="columns">
+        <div class="column control">
+            <input class="input" type="text" id="obnizId" placeholder="obnizのID" />
+        </div>
+        <div class="column buttons" style="margin-top: 1.0rem">
+            <button class="button is-success is-light" type="button" onclick="connect()">
+                接続
+            </button>
+        </div>
+    </div>
 
 <div style="text-align: center;">
     <div class="buttons" style="margin-top: 1.0rem">
