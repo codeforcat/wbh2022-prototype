@@ -57,16 +57,22 @@ function connect() {
     await obniz.ble.scan.startWait(target)
 
     // joystick
-    // Javascript Example
+    
+    // stateは(normal|gains|pains)3種類の状態があるとしている
     var state = "normal";
+    
+    // 初期値はxもyも=512（中央）としておく
     var x = y = tmp_x = tmp_y = 512;
+
     var joystick = obniz.wired("JoyStick", { gnd: 0, vcc: 1, x: 2, y: 3, sw: 4 });
     /**
      * GROVE JOYSTICK
      * swはないのでダミー
      * x,yアナログ
-     * ボタン押下はx=1
+     * ボタン押下はx=1024
      */
+
+    // x軸とボタンクリック判定
     joystick.onchangex = function (val) {
       x = parseInt(1024 * val);
       // console.log(x," ",y)
@@ -75,19 +81,18 @@ function connect() {
         if (state != "pains") {
           state = "pains";
           console.log("pains," + x);
-          // toioのobnizへメッセージ送る
+          // pains処理
           pains();
-
         }
         // 前回と100動いていればgain状態とみなす
       } else if (abs(tmp_x - x) > 100) {
         if (state != "gains") {
           state = "gains";
           console.log("gains," + x);
-          // toioのobnizへメッセージ送る
+          // gainz処理
           gains();
         }
-
+        // あまり動いてなければnormalとして乱発を防ぐ
       } else {
         state = "normal"
       }
@@ -102,9 +107,10 @@ function connect() {
         if (state != "gains") {
           state = "gains";
           console.log("gains," + y);
-          // toioのobnizへメッセージ送る
+          // gains処理
           gains();
         }
+        // あまり動いてなければnormalとして乱発を防ぐ
       } else {
         state = "normal"
       }
